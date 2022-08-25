@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "tgcaptcha"
+version = "0.1.0"
+description = "Stateless captcha telegram bot"
+authors = ["cofob <cofob@riseup.net>"]
+license = "GPLv3"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Telethon = "^1.24.0"
+
+[tool.poetry.dev-dependencies]
+black = "^22.6.0"
+
+[tool.poetry.scripts]
+tgcaptcha = "tgcaptcha.__main__:main"
+
+[tool.black]
+line-length = 120
+target-version = ['py310']
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

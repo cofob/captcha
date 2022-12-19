@@ -7,22 +7,25 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-        env = pkgs.poetry2nix.mkPoetryEnv {
-          projectDir = ./.;
-          editablePackageSources = {
-            app = ./src;
+    flake-utils.lib.eachDefaultSystem
+      (system:
+        let
+          pkgs = import nixpkgs { inherit system; };
+          env = pkgs.poetry2nix.mkPoetryEnv {
+            projectDir = ./.;
+            editablePackageSources = {
+              app = ./src;
+            };
           };
-        };
-      in
-      {
-        devShells.default = env.env.overrideAttrs (oldAttrs: {
-          buildInputs = with pkgs; [ python3 poetry python3Packages.jedi-language-server ];
-        });
-      }
-    ) // {
+        in
+        {
+          devShells.default = env.env.overrideAttrs (oldAttrs: {
+            buildInputs = with pkgs; [ python3 poetry python3Packages.jedi-language-server ];
+          });
+
+          packages.default = pkgs.callPackage ./package.nix { };
+        }
+      ) // {
       nixosModule = import ./module.nix;
     };
 }

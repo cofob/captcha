@@ -1,3 +1,5 @@
 .direnv
 *.session
+__pycache__
+*.pyc
 /result

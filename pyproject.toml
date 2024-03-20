@@ -10,7 +10,7 @@ python = "^3.9"
 Telethon = "^1.24.0"
 
 [tool.poetry.dev-dependencies]
-black = "^22.6.0"
+black = "^24.3.0"
 
 [tool.poetry.scripts]
 tgcaptcha = "tgcaptcha.__main__:main"
